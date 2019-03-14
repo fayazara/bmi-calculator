@@ -294,6 +294,19 @@
                                             <h3 class="white-text center has-text-weight-bold is-size-1">
                                                 {{ (weight/(height*height)*10000).toFixed(1) }}</h3>
                                             <p class="white-text center">Normal BMI Range: 18.5 - 22.9</p>
+                                            <h5 class="marb12 white-text center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) < 18.5">This is bad 😥, you are in Underweight according to WHO!</h5>
+                                            <h5 class="marb12 white-text center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 18.5 && (weight/(height*height)*10000).toFixed(1) < 23">
+                                                You have a normal body weight. Congratulations 🎉<</h5>
+                                            <h5 class="marb12 white-text center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 23 && (weight/(height*height)*10000).toFixed(1) < 25">
+                                                This is bad 😥, you are in Overweight according to WHO!</h5>
+                                            <h5 class="marb12 white-text center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 25 && (weight/(height*height)*10000).toFixed(1) < 30">
+                                                This is bad 😥, you are in Pre Obese according to WHO!</h5>
+                                            <h5 class="marb12 white-text center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 30">This is really bad 😥, you are in OBESE according to WHO!</h5>
                                             <!-- <h5 class="marb12 white-text center has-text-weight-bold is-size-5">You have
                                                 a normal body weight. Congratulations 🎉</h5> -->
                                             <div class="center consultationBtn">
