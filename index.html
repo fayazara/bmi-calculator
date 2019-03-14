@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link href='https://unpkg.com/boxicons@1.9.1/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Product+Sans:100,300,400,500,600,700,800">
+    <link rel="stylesheet" href="https://truweight.in/wp-content/themes/healthcoach/page-templates/BMI/odometer.css" />
+    <script src="https://truweight.in/wp-content/themes/healthcoach/page-templates/BMI/odometer.js"></script>
+    <meta name="theme-color" content="#04040c">
+</head>
+
+<body>
+    <style>
+        * {
+            font-family: Product sans;
+        }
+
+        body {
+            background-color: #0a0d22;
+            height: 100vh;
+        }
+
+        .genderIcon {
+            font-size: 3rem;
+        }
+
+        .card {
+            background-color: #1d1f33;
+            border-radius: 4px;
+        }
+
+        .white-text {
+            color: #fff !important;
+        }
+
+        .row {
+            margin-bottom: 1.5rem;
+        }
+
+        .slidecontainer {
+            width: 100%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 1;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ed4855;
+            cursor: pointer;
+
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ed4855;
+            cursor: pointer;
+        }
+
+        .section {
+            padding: 1.5rem 1.5rem;
+        }
+
+        nav {
+            background-color: #0a0d22;
+            height: 3rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.7rem;
+        }
+
+        .large-font {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .genderCard {
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .genderCheckIcon {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            color: #969696;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .2s;
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .margB05 {
+            margin-bottom: 0.4rem;
+        }
+
+        .content h5 {
+            margin-bottom: 0;
+        }
+
+        .grey-text {
+            color: #969696 !important;
+        }
+
+        .activeGenderCard {
+            color: #fff !important;
+        }
+
+        .card {
+            transition: all 0.2s;
+        }
+
+        footer {
+            background: #ed4855;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+    <div id="app">
+        <nav>
+            <p class="white-text is-uppercase has-text-weight-bold is-size-5">BMI Calculator</p>
+        </nav>
+        <main>
+            <transition name="custom-classes-transition"
+            enter-active-class="animated tada"
+            leave-active-class="animated bounceOutRight">
+
+            </transition>
+            <section class="section" v-if="step === 1">
+                <div class="container">
+                    <div class="row">
+                        <div class="columns is-mobile">
+                            <div class="column">
+                                <div class="card genderCard" @click="gender = 'male'"
+                                    :class="{ 'activeGenderCard' : gender == 'male'}">
+                                    <div class="card-content">
+                                        <div class="content">
+                                            <transition name="fade">
+                                                <i v-if="gender == 'male'"
+                                                    class='bx bxs-check-circle genderCheckIcon'></i>
+                                            </transition>
+                                            <div class="center">
+                                                <span class="margB05"><i class='bx bx-male genderIcon'></i></span>
+                                                <p>Male</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="card genderCard" @click="gender = 'female'"
+                                    :class="{ 'activeGenderCard' : gender == 'female'}">
+                                    <div class="card-content">
+                                        <div class="content">
+                                            <div class="content">
+                                                <transition name="fade">
+                                                    <i v-if="gender == 'female'"
+                                                        class='bx bxs-check-circle genderCheckIcon'></i>
+                                                </transition>
+                                                <div class="center">
+                                                    <span class="margB05"><i class='bx bx-female genderIcon'></i></span>
+                                                    <p>Female</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="content">
+                                    <div class="content">
+                                        <div class="center white-text">
+                                            <h3 class="white-text">Height</h3>
+                                            <h5 class="white-text">{{ height }} cm</h5>
+                                            <div class="slidecontainer">
+                                                <input type="range" step="1" min="120" max="213" value="120"
+                                                    class="slider" v-model="height">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="content">
+                                    <div class="content">
+                                        <div class="center white-text">
+                                            <h3 class="white-text">Weight</h3>
+                                            <h5 class="white-text">{{ weight }} kg</h5>
+                                            <div class="slidecontainer">
+                                                <input type="range" step="1" min="30" value="30" max="200"
+                                                    class="slider" v-model="weight">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section v-if="step === 2" class="mt2">
+                    <h4 class="white-text center has-text-weight-bold is-size-6">Result</h4>
+            </section>
+        </main>
+        <footer>
+            <h3 class="white-text is-uppercase has-text-weight-bold is-size-5" v-if="step === 1" @click="step++">Calculate Your BMI</h3>
+            <h3 class="white-text is-uppercase has-text-weight-bold is-size-5" v-if="step === 2">Recalculate</h3>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                height: 120,
+                weight: 30,
+                bmi: 0,
+                gender: 'male',
+                step: 2
+            },
+            methods: {
+            }
+        });
+
+    </script>
+</body>
+
+</html>
