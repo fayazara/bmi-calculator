@@ -9,8 +9,8 @@
     <link href='https://unpkg.com/boxicons@1.9.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Product+Sans:100,300,400,500,600,700,800">
-    <link rel="stylesheet" href="https://truweight.in/wp-content/themes/healthcoach/page-templates/BMI/odometer.css" />
-    <script src="https://truweight.in/wp-content/themes/healthcoach/page-templates/BMI/odometer.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
     <meta name="theme-color" content="#04040c">
 </head>
 
@@ -154,51 +154,111 @@
             justify-content: center;
             cursor: pointer;
         }
+
+        .m0 {
+            margin: 0 !important;
+        }
+
+        .marb12 {
+            margin-bottom: 1.2rem !important;
+        }
+
+        .content h3:not(:first-child) {
+            margin-top: unset;
+        }
+
+        .greenBmi {
+            color: #6ce77b !important;
+        }
+
+        .redBmi {
+            color: #f44336 !important;
+        }
+
+        .consultationBtn {
+            background-color: #0a0d22;
+            padding: 1.2rem;
+            border-radius: 4px;
+        }
     </style>
     <div id="app">
         <nav>
             <p class="white-text is-uppercase has-text-weight-bold is-size-5">BMI Calculator</p>
         </nav>
         <main>
-            <transition name="custom-classes-transition"
-            enter-active-class="animated tada"
-            leave-active-class="animated bounceOutRight">
-
-            </transition>
-            <section class="section" v-if="step === 1">
-                <div class="container">
-                    <div class="row">
-                        <div class="columns is-mobile">
-                            <div class="column">
-                                <div class="card genderCard" @click="gender = 'male'"
-                                    :class="{ 'activeGenderCard' : gender == 'male'}">
-                                    <div class="card-content">
-                                        <div class="content">
-                                            <transition name="fade">
-                                                <i v-if="gender == 'male'"
-                                                    class='bx bxs-check-circle genderCheckIcon'></i>
-                                            </transition>
-                                            <div class="center">
-                                                <span class="margB05"><i class='bx bx-male genderIcon'></i></span>
-                                                <p>Male</p>
+            <transition name="fade">
+                <section class="section" v-if="step === 1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="columns is-mobile">
+                                <div class="column">
+                                    <div class="card genderCard" @click="gender = 'male'"
+                                        :class="{ 'activeGenderCard' : gender == 'male'}">
+                                        <div class="card-content">
+                                            <div class="content">
+                                                <transition name="fade">
+                                                    <i v-if="gender == 'male'"
+                                                        class='bx bxs-check-circle genderCheckIcon'></i>
+                                                </transition>
+                                                <div class="center">
+                                                    <span class="margB05"><i class='bx bx-male genderIcon'></i></span>
+                                                    <p>Male</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="card genderCard" @click="gender = 'female'"
+                                        :class="{ 'activeGenderCard' : gender == 'female'}">
+                                        <div class="card-content">
+                                            <div class="content">
+                                                <div class="content">
+                                                    <transition name="fade">
+                                                        <i v-if="gender == 'female'"
+                                                            class='bx bxs-check-circle genderCheckIcon'></i>
+                                                    </transition>
+                                                    <div class="center">
+                                                        <span class="margB05"><i
+                                                                class='bx bx-female genderIcon'></i></span>
+                                                        <p>Female</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column">
-                                <div class="card genderCard" @click="gender = 'female'"
-                                    :class="{ 'activeGenderCard' : gender == 'female'}">
-                                    <div class="card-content">
+                        </div>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="content">
                                         <div class="content">
-                                            <div class="content">
-                                                <transition name="fade">
-                                                    <i v-if="gender == 'female'"
-                                                        class='bx bxs-check-circle genderCheckIcon'></i>
-                                                </transition>
-                                                <div class="center">
-                                                    <span class="margB05"><i class='bx bx-female genderIcon'></i></span>
-                                                    <p>Female</p>
+                                            <div class="center white-text">
+                                                <h3 class="white-text">Height</h3>
+                                                <h5 class="white-text">{{ height }} cm</h5>
+                                                <div class="slidecontainer">
+                                                    <input type="range" step="1" min="120" max="213" value="120"
+                                                        class="slider" v-model="height">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div class="content">
+                                            <div class="center white-text">
+                                                <h3 class="white-text">Weight</h3>
+                                                <h5 class="white-text">{{ weight }} kg</h5>
+                                                <div class="slidecontainer">
+                                                    <input type="range" step="1" min="30" value="30" max="200"
+                                                        class="slider" v-model="weight">
                                                 </div>
                                             </div>
                                         </div>
@@ -207,17 +267,37 @@
                             </div>
                         </div>
                     </div>
+                </section>
+            </transition>
+            <transition name="fade">
+                <section v-if="step === 2" class="section">
+                    <h4 class="mb2 white-text center has-text-weight-bold is-size-6">Result</h4>
                     <div class="row">
                         <div class="card">
                             <div class="card-content">
                                 <div class="content">
                                     <div class="content">
                                         <div class="center white-text">
-                                            <h3 class="white-text">Height</h3>
-                                            <h5 class="white-text">{{ height }} cm</h5>
-                                            <div class="slidecontainer">
-                                                <input type="range" step="1" min="120" max="213" value="120"
-                                                    class="slider" v-model="height">
+                                            <h5 class="marb12 redBmi center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) < 18.5">Underweight</h5>
+                                            <h5 class="marb12 greenBmi center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 18.5 && (weight/(height*height)*10000).toFixed(1) < 23">
+                                                Normal</h5>
+                                            <h5 class="marb12 redBmi center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 23 && (weight/(height*height)*10000).toFixed(1) < 25">
+                                                Overweight</h5>
+                                            <h5 class="marb12 redBmi center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 25 && (weight/(height*height)*10000).toFixed(1) < 30">
+                                                Pre Obese</h5>
+                                            <h5 class="marb12 redBmi center has-text-weight-bold is-size-6 "
+                                                v-if="(weight/(height*height)*10000).toFixed(1) > 30">OBESE</h5>
+                                            <h3 class="white-text center has-text-weight-bold is-size-1">
+                                                {{ (weight/(height*height)*10000).toFixed(1) }}</h3>
+                                            <p class="white-text center">Normal BMI Range: 18.5 - 22.9</p>
+                                            <!-- <h5 class="marb12 white-text center has-text-weight-bold is-size-5">You have
+                                                a normal body weight. Congratulations 🎉</h5> -->
+                                            <div class="center consultationBtn">
+                                                Get Consultation
                                             </div>
                                         </div>
                                     </div>
@@ -225,33 +305,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="content">
-                                    <div class="content">
-                                        <div class="center white-text">
-                                            <h3 class="white-text">Weight</h3>
-                                            <h5 class="white-text">{{ weight }} kg</h5>
-                                            <div class="slidecontainer">
-                                                <input type="range" step="1" min="30" value="30" max="200"
-                                                    class="slider" v-model="weight">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section v-if="step === 2" class="mt2">
-                    <h4 class="white-text center has-text-weight-bold is-size-6">Result</h4>
-            </section>
+                </section>
+            </transition>
         </main>
         <footer>
-            <h3 class="white-text is-uppercase has-text-weight-bold is-size-5" v-if="step === 1" @click="step++">Calculate Your BMI</h3>
-            <h3 class="white-text is-uppercase has-text-weight-bold is-size-5" v-if="step === 2">Recalculate</h3>
+            <h3 class="white-text is-uppercase has-text-weight-bold is-size-5" v-if="step === 1" @click="step++">
+                Calculate Your BMI</h3>
+            <h3 class="white-text is-uppercase has-text-weight-bold is-size-5" v-if="step === 2" @click="step--">
+                Recalculate</h3>
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -263,9 +324,10 @@
                 weight: 30,
                 bmi: 0,
                 gender: 'male',
-                step: 2
+                step: 1
             },
             methods: {
+
             }
         });
 
